@@ -18,7 +18,7 @@ const Section = React.createClass({
         education: ResumePropTypes.educationSet,
         skills: ResumePropTypes.skillsSet,
         languages: ResumePropTypes.languagesSet,
-        portfolio: ResumePropTypes.publicationsSet,
+        portfolio: ResumePropTypes.projectsSet,
         references: ResumePropTypes.referencesSet
     },
 
