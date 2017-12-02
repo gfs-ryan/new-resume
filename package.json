@@ -1,27 +1,22 @@
 {
-  "name": "suddi.github.io",
+  "name": "resume-rw",
   "private": true,
-  "description": "Sudharshan Ravindran personal site",
-  "version": "1.2.2",
-  "homepage": "https://suddi.github.io",
+  "description": "Ryan Wilson personal site",
+  "version": "0.1.0",
+  "homepage": "https://www.ryanwilson.rocks",
   "author": {
-    "name": "Sudharshan Ravindran",
-    "email": "suddi@mail.io",
-    "url": "https://suddi.github.io"
+    "name": "Ryan Wilson",
+    "email": "ryan@greenfields.io",
+    "url": "https://www.ryanwilson.rocks"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/suddi/suddi.github.io"
+    "url": "https://github.com/gfs-ryan/resume-rw"
   },
   "bugs": {
-    "url": "https://github.com/suddi/suddi.github.io/issues"
+    "url": "https://github.com/gfs-ryan/resume-rw/issues"
   },
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://github.com/suddi/suddi.github.io/LICENSE"
-    }
-  ],
+
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 2.0.0"
@@ -58,12 +53,5 @@
     "webpack": "^3.0.0",
     "webpack-dev-server": "2.7.1",
     "webpack-s3-plugin": "^0.9.0"
-  },
-  "eslintConfig": {
-    "extends": "suddi/frontend",
-    "rules": {
-      "react/no-deprecated": "off",
-      "react/no-array-index-key": "off"
-    }
   }
 }

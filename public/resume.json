@@ -219,9 +219,9 @@
     ],
     "projects": [
         {
-            "name": "Green Fields Website",
+            "name": "Company Website",
             "publisher": "Green Fields Solutions, Inc.",
-            "category": "Website",
+            "category": "Web",
             "releaseDate": "2017-11-01",
             "website": "http://www.greenfields.io",
             "summary": "",
@@ -238,7 +238,7 @@
         {
             "name": "Arizona Cannabis Community",
             "publisher": "Ryan Wilson & Andrew Peterson",
-            "category": "Web App",
+            "category": "Web",
             "releaseDate": "2017-10-21",
             "website": "https://az-mmj-community.firebaseapp.com",
             "summary": "This project was completed during the Coder Camps bootcamp which started in Aug. 2017",
@@ -255,13 +255,13 @@
         {
             "name": "DrinkQuest",
             "publisher": "Green Fields Solutions, Inc.",
-            "category": "Web App",
+            "category": "Web",
             "releaseDate": "2017-11-30",
             "website": "https://drink-app-dev.firebaseapp.com",
             "summary": "",
             "image": {
-                "modal": "http://www.greenfields.io/wp-content/uploads/DrinkQuest.png",
-                "thumb": "http://www.greenfields.io/wp-content/uploads/DrinkQuest.png"
+                "modal": "",
+                "thumb": "http://www.greenfields.io/wp-content/uploads/green-fields.png"
             },
             "keywords": [
                 "Firebase",
@@ -275,10 +275,10 @@
             "category": "Web App",
             "releaseDate": "TBD",
             "website": "https://www.weedvendor.com",
-            "summary": "Weedvendor is a startup project that has recently seen a lot of traction. Should have a good example to demo within the upcoming weeks.",
+            "summary": "",
             "image": {
-                "modal": "http://www.greenfields.io/wp-content/uploads/tech_business.jpg",
-                "thumb": "http://www.greenfields.io/wp-content/uploads/2017/03/video_agency_home_preview.jpg"
+                "modal": "",
+                "thumb": "http://www.greenfields.io/wp-content/uploads/green-fields.png"
             },
             "keywords": [
                 "Firebase",
