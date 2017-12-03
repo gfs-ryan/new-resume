@@ -1,24 +1,22 @@
-'use strict';
-
-const moment = require('moment');
+import moment from 'moment'
 
 const Datetime = {
     getDisplayFromDate: function (datetime) {
         if (datetime === 'Present') {
-            return datetime;
+            return datetime
         }
 
         const applyFunc = function (dt) {
-            const d = moment(dt, 'YYYY-MM-DD');
-            const date = d.date();
+            const d = moment(dt, 'YYYY-MM-DD')
+            const date = d.date()
             if (date > 20) {
-                return d.add(1, 'months').format('MMM YYYY');
+                return d.add(1, 'months').format('MMM YYYY')
             }
-            return d.format('MMM YYYY');
-        };
-        const value = applyFunc(datetime);
-        return value === 'Invalid date' ? datetime : value;
+            return d.format('MMM YYYY')
+        }
+        const value = applyFunc(datetime)
+        return value === 'Invalid date' ? datetime : value
     }
-};
+}
 
-module.exports = Datetime;
+export default Datetime

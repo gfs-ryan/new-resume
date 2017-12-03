@@ -1,17 +1,10 @@
-'use strict';
+import React, { Component } from 'react'
+import Carousel from 'nuka-carousel'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+class Entry extends Component {
 
-const Carousel = require('nuka-carousel');
-
-const ResumePropTypes = require('../../prop_types/resume');
-
-const Entry = React.createClass({
-    propTypes: {
-        entry: ResumePropTypes.references
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <blockquote>
@@ -24,23 +17,30 @@ const Entry = React.createClass({
                     </cite>
                 </blockquote>
             </div>
-        );
+        )
     }
-});
+}
 
-const References = React.createClass({
-    propTypes: {
-        content: ResumePropTypes.referencesSet
-    },
+Entry.propTypes = {
+    entry: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        position: PropTypes.string.isRequired,
+        company: PropTypes.string.isRequired,
+        reference: PropTypes.string.isRequired
+    })
+}
 
-    render: function () {
+class References extends Component {
+
+    render() {
         const carouselConfig = {
             autoplay: true,
             decorators: [],
             framePadding: '10px',
             cellSpacing: 30,
             wrapAround: true
-        };
+        }
+
         return (
             <section id='testimonials'>
                 <div className='text-container'>
@@ -59,7 +59,7 @@ const References = React.createClass({
                                     {this.props.content.map(function (entry, index) {
                                         return (
                                             <Entry key={index} entry={entry}/>
-                                        );
+                                        )
                                     })}
                                 </Carousel>
                             </div>
@@ -67,8 +67,19 @@ const References = React.createClass({
                     </div>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = References;
+References.propTypes = {
+    content: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            position: PropTypes.string.isRequired,
+            company: PropTypes.string.isRequired,
+            reference: PropTypes.string.isRequired
+        })
+    )
+}
+
+export default References

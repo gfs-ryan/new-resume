@@ -1,10 +1,8 @@
-'use strict';
+import React, { Component } from 'react'
 
-const React = require('react');
-
-const NotFound = React.createClass({
-    render: function () {
-        return (
+class NotFound extends Component {
+    render() {
+        return(
             <div className='not-found'>
                 404: It appears you have lost your way
                 <br/>
@@ -12,8 +10,8 @@ const NotFound = React.createClass({
                     Return to safety <a href='/'>here.</a>
                 </span>
             </div>
-        );
+        )
     }
-});
+}
 
-module.exports = NotFound;
+export default NotFound

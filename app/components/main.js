@@ -1,25 +1,23 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-const React = require('react');
-const PropTypes = React.PropTypes;
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
-const Main = React.createClass({
-    propTypes: {
-        location: PropTypes.shape({
-            pathname: PropTypes.string.isRequired
-        }).isRequired
-    },
-
-    render: function () {
+class Main extends Component {
+    render() {
         return (
             <div className='main-container'>
                 <ReactCSSTransitionGroup transitionName='appear' transitionEnterTimeout={500} transitionLeaveTimeout={500}>
                     {React.cloneElement(this.props.children, {key: this.props.location.pathname})}
                 </ReactCSSTransitionGroup>
             </div>
-        );
+        )
     }
-});
+}
 
-module.exports = Main;
+Main.propTypes = {
+    location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired
+    }).isRequired
+}
+
+export default Main

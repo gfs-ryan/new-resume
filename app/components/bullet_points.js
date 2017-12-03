@@ -1,15 +1,9 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+class BulletPoints extends Component {
 
-const ResumePropTypes = require('../prop_types/resume');
-
-const BulletPoints = React.createClass({
-    propTypes: {
-        points: ResumePropTypes.bulletPoints
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 {this.props.points.map(function (point, index) {
@@ -21,8 +15,14 @@ const BulletPoints = React.createClass({
                     );
                 })}
             </div>
-        );
+        )
     }
-});
+}
 
-module.exports = BulletPoints;
+BulletPoints.propTypes = {
+    points: PropTypes.arrayOf(
+        PropTypes.string
+    )
+}
+
+export default BulletPoints

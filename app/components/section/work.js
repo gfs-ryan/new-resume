@@ -1,24 +1,15 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import BulletPoints from '../bullet_points'
+import Datetime from '../../utils/datetime'
 
-const React = require('react');
-const PropTypes = React.PropTypes;
+class Entry extends Component {
 
-const ResumePropTypes = require('../../prop_types/resume');
-const BulletPoints = require('../bullet_points');
-const Datetime = require('../../utils/datetime');
-
-const Entry = React.createClass({
-    propTypes: {
-        index: PropTypes.number.isRequired,
-        total: PropTypes.number.isRequired,
-        entry: ResumePropTypes.work
-    },
-
-    render: function () {
-        const startDate = Datetime.getDisplayFromDate(this.props.entry.startDate);
-        const endDate = Datetime.getDisplayFromDate(this.props.entry.endDate);
-        const index = this.props.index + 1;
-        const divider = index === this.props.total ? (<br/>) : (<hr/>);
+    render() {
+        const startDate = Datetime.getDisplayFromDate(this.props.entry.startDate)
+        const endDate = Datetime.getDisplayFromDate(this.props.entry.endDate)
+        const index = this.props.index + 1
+        const divider = index === this.props.total ? (<br/>) : (<hr/>)
 
         return (
             <div className='row item'>
@@ -37,17 +28,30 @@ const Entry = React.createClass({
                 </div>
                 {divider}
             </div>
-        );
+        )
     }
-});
+}
 
-const Work = React.createClass({
-    propTypes: {
-        content: ResumePropTypes.workSet
-    },
+Entry.propTypes = {
+    index: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+    entry: PropTypes.shape({
+        company: PropTypes.string.isRequired,
+        position: PropTypes.string.isRequired,
+        website: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired,
+        summary: PropTypes.string.isRequired,
+        highlights: PropTypes.arrayOf(
+            PropTypes.string
+        )
+    })
+}
 
-    render: function () {
-        const numEntries = this.props.content.length;
+class Work extends Component {
+
+    render() {
+        const numEntries = this.props.content.length
         return (
             <section id='work'>
                 <div className='row work'>
@@ -60,13 +64,29 @@ const Work = React.createClass({
                         {this.props.content.map(function (entry, index) {
                             return (
                                 <Entry key={index} index={index} total={numEntries} entry={entry}/>
-                            );
+                            )
                         })}
                     </div>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = Work;
+Work.propTypes = {
+    content: PropTypes.arrayOf(
+        PropTypes.shape({
+            company: PropTypes.string.isRequired,
+            position: PropTypes.string.isRequired,
+            website: PropTypes.string.isRequired,
+            startDate: PropTypes.string.isRequired,
+            endDate: PropTypes.string.isRequired,
+            summary: PropTypes.string.isRequired,
+            highlights: PropTypes.arrayOf(
+                PropTypes.string
+            )
+        })
+    )
+}
+
+export default Work

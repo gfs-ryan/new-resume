@@ -1,16 +1,10 @@
-'use strict';
+import React, { Component } from 'react'
+import SocialMedia from '../social_media'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+class Footer extends Component {
 
-const ResumePropTypes = require('../../prop_types/resume');
-const SocialMedia = require('../social_media');
-
-const Footer = React.createClass({
-    propTypes: {
-        content: ResumePropTypes.basics
-    },
-
-    render: function () {
+    render() {
         return (
             <footer>
                 <div className='row'>
@@ -37,14 +31,42 @@ const Footer = React.createClass({
                         </ul>
                     </div>
                     <div id='go-top'>
-                        <a className='smoothscroll' title='Back to Top' href='#home'>
+                        <a className='smoothscroll' title='Back to Top' href='/'>
                             <i className='icon-up-open'/>
                         </a>
                     </div>
                 </div>
             </footer>
-        );
+        )
     }
-});
+}
 
-module.exports = Footer;
+Footer.propTypes = {
+    content: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        picture: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        website: PropTypes.string.isRequired,
+        summary: PropTypes.arrayOf(
+            PropTypes.string
+        ),
+        location: PropTypes.shape({
+            address: PropTypes.string.isRequired,
+            postalCode: PropTypes.string.isRequired,
+            city: PropTypes.string.isRequired,
+            countryCode: PropTypes.string.isRequired,
+            region: PropTypes.string.isRequired
+        }),
+        profiles: PropTypes.arrayOf(
+            PropTypes.shape({
+                network: PropTypes.string.isRequired,
+                username: PropTypes.string.isRequired,
+                url: PropTypes.string.isRequired
+            })
+        )
+    })
+}
+
+export default Footer

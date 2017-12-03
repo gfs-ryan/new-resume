@@ -1,4 +1,3 @@
-'use strict';
 
 const Random = {
     shuffleArray: function (array) {
@@ -18,4 +17,4 @@ const Random = {
     }
 };
 
-module.exports = Random;
+export default Random

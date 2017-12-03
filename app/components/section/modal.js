@@ -1,25 +1,15 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import ReactModal from 'react-modal'
 
-const React = require('react');
-const PropTypes = React.PropTypes;
+class Modal extends Component {
 
-const ReactModal = require('react-modal');
-
-const ResumePropTypes = require('../../prop_types/resume');
-
-const Modal = React.createClass({
-    propTypes: {
-        entry: ResumePropTypes.publications,
-        isOpen: PropTypes.bool.isRequired,
-        onRequestClose: PropTypes.func.isRequired
-    },
-
-    render: function () {
+    render() {
         const style = {
             overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                backgroundColor: 'rgba(0,0,0,0.75)'
             }
-        };
+        }
 
         return (
             <ReactModal className='popup-modal mfp-hide' isOpen={this.props.isOpen} onRequestClose={this.props.onRequestClose} style={style}>
@@ -45,8 +35,28 @@ const Modal = React.createClass({
                     <a className='popup-modal-dismiss' onClick={this.props.onRequestClose}>Close</a>
                 </div>
             </ReactModal>
-        );
+        )
     }
-});
+}
 
-module.exports = Modal;
+Modal.propTypes = {
+    entry: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        publisher: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        releaseDate: PropTypes.string.isRequired,
+        website: PropTypes.string.isRequired,
+        summary: PropTypes.string.isRequired,
+        image: PropTypes.shape({
+            modal: PropTypes.string.isRequired,
+            thumb: PropTypes.string.isRequired
+        }),
+        keywords: PropTypes.arrayOf(
+            PropTypes.string
+        )
+    }),
+    isOpen: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.func.isRequired
+}
+
+export default Modal

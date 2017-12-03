@@ -1,44 +1,43 @@
-'use strict';
+import React, { Component } from 'react'
 
-const React = require('react');
-
-const Header = React.createClass({
-    getInitialState: function () {
+class Header extends Component {
+    getInitialState() {
         return {
             window: {
                 height: 0,
                 width: 0
             }
-        };
-    },
+        }
+    }
 
-    updateDimensions: function () {
+    updateDimensions() {
         return this.setState({
             window: {
                 height: window.innerHeight,
                 width: window.innerWidth
             }
-        });
-    },
+        })
+    }
 
-    componentWillMount: function () {
-        this.updateDimensions();
-    },
+    componentWillMount() {
+        this.updateDimensions()
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         return window.addEventListener('resize', this.updateDimensions);
-    },
+    }
 
-    render: function () {
+    render() {
         const style = {
             height: this.state.window.height
-        };
+        }
+
         return (
             <header id='home' style={style}>
                 {this.props.children}
             </header>
-        );
+        )
     }
-});
+}
 
-module.exports = Header;
+export default Header

@@ -1,18 +1,12 @@
-'use strict';
+import React, { Component } from 'react'
+import Datetime from '../../utils/datetime'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+class Entry extends Component {
 
-const ResumePropTypes = require('../../prop_types/resume');
-const Datetime = require('../../utils/datetime');
-
-const Entry = React.createClass({
-    propTypes: {
-        entry: ResumePropTypes.education
-    },
-
-    render: function () {
-        const startDate = Datetime.getDisplayFromDate(this.props.entry.startDate);
-        const endDate = Datetime.getDisplayFromDate(this.props.entry.endDate);
+    render() {
+        const startDate = Datetime.getDisplayFromDate(this.props.entry.startDate)
+        const endDate = Datetime.getDisplayFromDate(this.props.entry.endDate)
         return (
             <div className='row item'>
                 <div className='twelve columns'>
@@ -26,16 +20,28 @@ const Entry = React.createClass({
                     </p>
                 </div>
             </div>
-        );
+        )
     }
-});
+}
 
-const Education = React.createClass({
-    propTypes: {
-        content: ResumePropTypes.educationSet
-    },
+Entry.propTypes = {
+    entry: PropTypes.shape({
+        institution: PropTypes.string.isRequired,
+        area: PropTypes.string.isRequired,
+        studyType: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired,
+        gpa: PropTypes.string.isRequired,
+        summary: PropTypes.string.isRequired,
+        courses: PropTypes.arrayOf(
+            PropTypes.string
+        )
+    })
+}
 
-    render: function () {
+class Education extends Component {
+
+    render() {
         return (
             <section id='education'>
                 <div className='row education'>
@@ -48,13 +54,29 @@ const Education = React.createClass({
                         {this.props.content.map(function (entry, index) {
                             return (
                                 <Entry key={index} entry={entry}/>
-                            );
+                            )
                         })}
                     </div>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = Education;
+Education.propTypes = {
+    content: PropTypes.arrayOf(
+        PropTypes.shape({
+            institution: PropTypes.string.isRequired,
+            area: PropTypes.string.isRequired,
+            studyType: PropTypes.string.isRequired,
+            startDate: PropTypes.string.isRequired,
+            endDate: PropTypes.string.isRequired,
+            gpa: PropTypes.string.isRequired,
+            summary: PropTypes.string.isRequired,
+            courses: PropTypes.arrayOf(
+                PropTypes.string
+            )
+        })
+    )
+}
+export default Education

@@ -1,21 +1,19 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-const React = require('react');
-const PropTypes = React.PropTypes;
-
-const Link = React.createClass({
-    propTypes: {
-        link: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-    },
-
-    render: function () {
+class Link extends Component {
+    render() {
         return (
             <li>
                 <a className='smoothscroll' href={`#${this.props.link}`}>{this.props.name}</a>
             </li>
-        );
+        )
     }
-});
+}
 
-module.exports = Link;
+Link.propTypes = {
+    link: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+}
+
+export default Link

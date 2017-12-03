@@ -1,16 +1,9 @@
-'use strict';
+import React, { Component } from 'react'
+import Link from './link'
+import PropTypes from 'prop-types'
 
-const React = require('react');
-
-const Link = require('./link');
-const ResumePropTypes = require('../../prop_types/resume');
-
-const Navigation = React.createClass({
-    propTypes: {
-        navigation: ResumePropTypes.navigation
-    },
-
-    render: function () {
+class Navigation extends Component {
+    render() {
         return (
             <nav id='nav-wrap' className='opaque'>
                 <a className='mobile-btn' href='#nav-wrap' title='Show navigation'>Show navigation</a>
@@ -24,8 +17,12 @@ const Navigation = React.createClass({
                     }.bind(this))}
                 </ul>
             </nav>
-        );
+        )
     }
-});
+}
 
-module.exports = Navigation;
+Navigation.propTypes = {
+    navigation: PropTypes.object.isRequired
+}
+
+export default Navigation

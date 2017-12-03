@@ -1,15 +1,9 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+class About extends Component {
 
-const ResumePropTypes = require('../../prop_types/resume');
-
-const About = React.createClass({
-    propTypes: {
-        content: ResumePropTypes.basics
-    },
-
-    render: function () {
+    render() {
         return (
             <section id='about'>
                 <div className='row'>
@@ -29,10 +23,8 @@ const About = React.createClass({
                             <div className='columns contact-details'>
                                 <h2>Contact Details</h2>
                                 <p className='address'>
-                                    {/*
                                     <span>{this.props.content.location.address}</span>
                                     <br/>
-                                    */}
                                     <span>{this.props.content.location.city}</span>
                                     <br/>
                                     <span>{this.props.content.location.countryCode}</span>
@@ -46,22 +38,37 @@ const About = React.createClass({
                                     </a>
                                 </p>
                             </div>
-                            {/*
-                            <div className='columns download'>
-                                <p>
-                                    <a href='#' className='button'>
-                                        <i className='fa fa-download'></i>
-                                        Download Resume
-                                    </a>
-                                </p>
-                            </div>
-                            */}
+                            {/*              <div className='columns download'>
+                <p>
+                  <a href='#' className='button'>
+                    <i className='fa fa-download' />
+                    Download Resume
+                  </a>
+                </p>
+              </div>*/}
                         </div>
                     </div>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = About;
+About.propTypes = {
+    content: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        picture: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        summary: PropTypes.arrayOf(
+            PropTypes.string
+        ),
+        location: PropTypes.shape({
+            address: PropTypes.string.isRequired,
+            city: PropTypes.string.isRequired,
+            countryCode: PropTypes.string.isRequired,
+        }),
+    })
+}
+
+export default About

@@ -1,35 +1,29 @@
-'use strict';
+import React, { Component } from 'react'
+import Random from '../../utils/random'
+import Modal from './modal'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+class Entry extends Component {
 
-const ResumePropTypes = require('../../prop_types/resume');
-const Random = require('../../utils/random');
-const Modal = require('./modal');
-
-const Entry = React.createClass({
-    propTypes: {
-        entry: ResumePropTypes.projects
-    },
-
-    getInitialState: function () {
+    getInitialState() {
         return {
             modalOpen: false
-        };
-    },
+        }
+    }
 
-    handleOpenModal: function () {
+    handleOpenModal() {
         return this.setState({
             modalOpen: true
-        });
-    },
+        })
+    }
 
-    handleCloseModal: function () {
+    handleCloseModal() {
         return this.setState({
             modalOpen: false
-        });
-    },
+        })
+    }
 
-    render: function () {
+    render() {
         return (
             <div className='columns portfolio-item'>
                 <div className='item-wrap' onClick={this.handleOpenModal}>
@@ -48,17 +42,32 @@ const Entry = React.createClass({
                 </div>
                 <Modal entry={this.props.entry} isOpen={this.state.modalOpen} onRequestClose={this.handleCloseModal}/>
             </div>
-        );
+        )
     }
-});
+}
 
-const Portfolio = React.createClass({
-    propTypes: {
-        content: ResumePropTypes.projectsSet
-    },
+Entry.propTypes = {
+    entry: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        publisher: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        releaseDate: PropTypes.string.isRequired,
+        website: PropTypes.string.isRequired,
+        summary: PropTypes.string.isRequired,
+        image: PropTypes.shape({
+            modal: PropTypes.string.isRequired,
+            thumb: PropTypes.string.isRequired
+        }),
+        keywords: PropTypes.arrayOf(
+            PropTypes.string
+        )
+    })
+}
 
-    render: function () {
-        const portfolio = Random.shuffleArray(this.props.content).slice(0, 8);
+class Portfolio extends Component {
+
+    render() {
+        const portfolio = Random.shuffleArray(this.props.content).slice(0, 8)
         return (
             <section id='portfolio'>
                 <div className='row'>
@@ -68,14 +77,34 @@ const Portfolio = React.createClass({
                             {portfolio.map(function (entry, index) {
                                 return (
                                     <Entry key={index} index={index} entry={entry}/>
-                                );
+                                )
                             })}
                         </div>
                     </div>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = Portfolio;
+Portfolio.propTypes = {
+    content: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            publisher: PropTypes.string.isRequired,
+            category: PropTypes.string.isRequired,
+            releaseDate: PropTypes.string.isRequired,
+            website: PropTypes.string.isRequired,
+            summary: PropTypes.string.isRequired,
+            image: PropTypes.shape({
+                modal: PropTypes.string.isRequired,
+                thumb: PropTypes.string.isRequired
+            }),
+            keywords: PropTypes.arrayOf(
+                PropTypes.string
+            )
+        })
+    )
+}
+
+export default Portfolio

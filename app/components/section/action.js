@@ -1,9 +1,8 @@
-'use strict';
+import React, { Component } from 'react'
 
-const React = require('react');
+class Action extends Component {
 
-const Action = React.createClass({
-    render: function () {
+    render() {
         return (
             <section id='call-to-action'>
                 <div className='row'>
@@ -23,8 +22,8 @@ const Action = React.createClass({
                     <div className='three columns action'/>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = Action;
+export default Action

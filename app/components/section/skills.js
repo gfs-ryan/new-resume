@@ -1,93 +1,95 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-const React = require('react');
-const PropTypes = React.PropTypes;
+class Entry extends Component {
 
-const ResumePropTypes = require('../../prop_types/resume');
-
-const Entry = React.createClass({
-    propTypes: {
-        entry: ResumePropTypes.languages
-    },
-
-    getInitialState: function () {
+    getInitialState() {
         return {
             style: {
                 background: '#313131'
             }
-        };
-    },
+        }
+    }
 
-    handleMouseEnter: function () {
+    handleMouseEnter() {
         return this.setState({
             style: {
                 background: '#11ABB0'
             }
-        });
-    },
+        })
+    }
 
-    handleMouseLeave: function () {
+    handleMouseLeave() {
         return this.setState({
             style: {
                 background: '#313131'
             }
-        });
-    },
+        })
+    }
 
-    render: function () {
+    render() {
         return (
             <li>
-                <span
-                    className={`bar-expand percentage${this.props.entry.level}`}
-                    onMouseEnter={this.handleMouseEnter}
-                    onMouseLeave={this.handleMouseLeave}
-                    style={this.state.style}/>
+        <span
+            className={`bar-expand percentage${this.props.entry.level}`}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            style={this.state.style}/>
                 <em>{this.props.entry.name}</em>
             </li>
-        );
+        )
     }
-});
+}
 
-const Skill = React.createClass({
-    propTypes: {
-        title: PropTypes.string.isRequired,
-        content: ResumePropTypes.languagesSet,
-        summary: PropTypes.arrayOf(PropTypes.string).isRequired
-    },
+Entry.propTypes = {
+    entry: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        level: PropTypes.string.isRequired
+    })
+}
 
-    render: function () {
-        const summary = this.props.summary.map(function (point, index) {
+class Skill extends Component {
+
+    render() {
+        const summary = this.props.summary.map((point, index) => {
             return (
                 <p key={index} className='skill-summary'>{point}</p>
-            );
-        });
+            )
+        })
         return (
             <div className='row inside'>
                 <h3>{this.props.title}</h3>
                 {summary}
                 <div className='bars'>
                     <ul className='skills'>
-                        {this.props.content.map(function (entry, index) {
+                        {this.props.content.map((entry, index) => {
                             return (
                                 <Entry key={index} entry={entry}/>
-                            );
+                            )
                         })}
                     </ul>
                 </div>
             </div>
-        );
+        )
     }
-});
+}
 
-const Skills = React.createClass({
-    propTypes: {
-        content: PropTypes.shape({
-            skills: ResumePropTypes.skillsSet,
-            languages: ResumePropTypes.languagesSet
-        }).isRequired
-    },
+Skill.propTypes = {
+    title: PropTypes.string.isRequired,
+    content: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            level: PropTypes.string.isRequired
+        })
+    ),
+    summary: PropTypes.arrayOf(
+        PropTypes.string
+    ).isRequired
+}
 
-    render: function () {
+class Skills extends Component {
+
+    render() {
         return (
             <section id='skill'>
                 <div className='row skill'>
@@ -97,23 +99,49 @@ const Skills = React.createClass({
                         </h1>
                     </div>
                     <div className='ten columns main-col'>
-                        {this.props.content.skills.map(function (skill, index) {
+                        {this.props.content.skills.map((skill, index) => {
                             return (
                                 <Skill
                                     key={index}
                                     title={skill.title}
                                     content={skill.skillDetails}
                                     summary={skill.description}/>
-                            );
+                            )
                         })}
-                        {/*
-                            <Skill title='Languages' content={this.props.content.languages}/>
-                        */}
+                        {/*<Skill title='Languages' content={this.props.content.languages}/>*/}
                     </div>
                 </div>
             </section>
-        );
+        )
     }
-});
+}
 
-module.exports = Skills;
+Skills.propTypes = {
+    content: PropTypes.shape({
+        skills: PropTypes.arrayOf(
+            PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                description: PropTypes.arrayOf(
+                    PropTypes.string
+                ),
+                skillDetails: PropTypes.arrayOf(
+                    PropTypes.shape({
+                        name: PropTypes.string.isRequired,
+                        level: PropTypes.string.isRequired,
+                        keywords: PropTypes.arrayOf(
+                            PropTypes.string
+                        )
+                    })
+                )
+            })
+        ),
+        languages: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                level: PropTypes.string.isRequired
+            })
+        )
+    }).isRequired
+}
+
+export default Skills

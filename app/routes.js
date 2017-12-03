@@ -1,28 +1,26 @@
-'use strict';
+import React from 'react'
+import {
+    Router,
+    Route,
+} from 'react-router-dom'
+import Main from './components/main'
+import Home from './components/home'
+import NotFound from './components/errors/not_found'
+import createBrowserHistory from 'history/createBrowserHistory'
 
-const React = require('react');
-const ReactRouter = require('react-router');
-
-const Main = require('./components/main');
-const Home = require('./components/home');
-const NotFound = require('./components/errors/not_found');
-
-const Router = ReactRouter.Router;
-const Route = ReactRouter.Route;
-const IndexRoute = ReactRouter.IndexRoute;
-const browserHistory = ReactRouter.browserHistory;
+const browserHistory = createBrowserHistory()
 
 const Routes = {
     get: function (config) {
         return (
             <Router history={browserHistory}>
                 <Route path='/' component={Main}>
-                    <IndexRoute config={config} component={Home}/>
+                    <Route config={config} component={Home}/>
                     <Route path='*' component={NotFound}/>
                 </Route>
             </Router>
-        );
+        )
     }
-};
+}
 
-module.exports = Routes;
+export default Routes

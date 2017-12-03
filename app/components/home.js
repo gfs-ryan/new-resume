@@ -1,44 +1,32 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import request from 'superagent'
+import Header from './header'
+import Navigation from '../components/navigation'
+import Banner from './banner'
+import ScrollDown from './scrollDown'
+import Loading from './loading'
+import Section from './section'
 
-const React = require('react');
-const PropTypes = React.PropTypes;
+class Home extends Component {
 
-const request = require('superagent');
-
-const Header = require('./header');
-const Navigation = require('./navigation');
-const Banner = require('./banner');
-const ScrollDown = require('./scrolldown');
-const Section = require('./section');
-const Loading = require('./loading');
-
-const Home = React.createClass({
-    propTypes: {
-        route: PropTypes.shape({
-            config: PropTypes.shape({
-                resumePath: PropTypes.string.isRequired,
-                navigation: PropTypes.object.isRequired
-            }).isRequired
-        }).isRequired
-    },
-
-    getInitialState: function () {
+    getInitialState() {
         return {
             resume: false
-        };
-    },
+        }
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         return request
             .get(this.props.route.config.resumePath)
             .end(function (error, response) {
                 return error ? error : this.setState({
                     resume: response.body
-                });
-            }.bind(this));
-    },
+                })
+            }.bind(this))
+    }
 
-    onLoad: function () {
+    onLoad() {
         return (
             <div>
                 <Header>
@@ -55,18 +43,27 @@ const Home = React.createClass({
                     portfolio={this.state.resume.projects}
                     references={this.state.resume.references}/>
             </div>
-        );
-    },
+        )
+    }
 
-    beforeLoad: function () {
+    beforeLoad() {
         return (
             <Loading/>
-        );
-    },
+        )
+    }
 
-    render: function () {
+    render() {
         return this.state.resume ? this.onLoad() : this.beforeLoad();
     }
-});
+}
 
-module.exports = Home;
+Home.propTypes = {
+    route: PropTypes.shape({
+        config: PropTypes.shape({
+            resumePath: PropTypes.string.isRequired,
+            navigation: PropTypes.object.isRequired
+        }).isRequired
+    }).isRequired
+}
+
+export default Home
