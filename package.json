@@ -11,12 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gfs-ryan/resume-rw"
+    "url": "https://github.com/gfs-ryan/new-resume"
   },
   "bugs": {
-    "url": "https://github.com/gfs-ryan/resume-rw/issues"
+    "url": "https://github.com/gfs-ryan/new-resume/issues"
   },
-
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 2.0.0"
@@ -25,12 +24,14 @@
     "bundle": "webpack -p --progress",
     "deploy": "webpack -p --progress --config webpack.deploy.js",
     "lint": "eslint .",
-    "prepush": "npm run lint && npm run security-check",
-    "security-check": "nsp check --output summary",
     "start": "webpack-dev-server --hot --inline",
     "test": "npm run lint && npm run security-check && npm run bundle"
   },
-  "dependencies": {},
+  "dependencies": {
+    "history": "^4.7.2",
+    "prop-types": "^15.6.0",
+    "react-router-dom": "^4.2.2"
+  },
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^7.0.0",
@@ -40,9 +41,7 @@
     "eslint": "^4.0.0",
     "eslint-config-suddi": "^4.0.0",
     "eslint-plugin-react": "^7.0.0",
-    "husky": "^0.14.0",
     "moment": "^2.17.0",
-    "nsp": "^2.0.0",
     "nuka-carousel": "^2.0.0",
     "react": "^15.0.0",
     "react-addons-css-transition-group": "^15.0.0",
